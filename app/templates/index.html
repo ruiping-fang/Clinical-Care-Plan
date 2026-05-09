@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Care Plan Generator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 20px;
+        }
+        input, textarea {
+            width: 100%;
+            padding: 10px;
+            margin: 5px 0;
+            box-sizing: border-box;
+        }
+        textarea {
+            height: 100px;
+        }
+        button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 12px 24px;
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+            margin-top: 10px;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        button:disabled {
+            background-color: #cccccc;
+            cursor: not-allowed;
+        }
+        #output {
+            background-color: #f4f4f4;
+            padding: 15px;
+            border-left: 4px solid #4CAF50;
+            white-space: pre-wrap;
+        }
+        .loading {
+            color: #666;
+            font-style: italic;
+        }
+    </style>
+</head>
+<body>
+    <h2>Care Plan Generator</h2>
+
+    <input id="name" placeholder="Patient Name" required><br>
+    <input id="diagnosis" placeholder="Diagnosis" required><br>
+    <input id="medication" placeholder="Medication" required><br>
+    <textarea id="history" placeholder="Patient History"></textarea><br>
+
+    <button id="submitBtn" onclick="submitForm()">Generate Care Plan</button>
+
+    <h3>Care Plan:</h3>
+    <pre id="output"></pre>
+
+    <script>
+        async function submitForm() {
+            const submitBtn = document.getElementById("submitBtn");
+            const outputEl = document.getElementById("output");
+
+            const data = {
+                name: document.getElementById("name").value,
+                diagnosis: document.getElementById("diagnosis").value,
+                medication: document.getElementById("medication").value,
+                history: document.getElementById("history").value
+            };
+
+            if (!data.name || !data.diagnosis || !data.medication) {
+                alert("Please fill in Patient Name, Diagnosis, and Medication");
+                return;
+            }
+
+            submitBtn.disabled = true;
+            submitBtn.innerText = "Generating...";
+            outputEl.innerText = "Generating care plan, please wait...";
+            outputEl.className = "loading";
+
+            try {
+                const res = await fetch("/generate/", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify(data)
+                });
+
+                const result = await res.json();
+                outputEl.innerText = result.careplan;
+                outputEl.className = "";
+            } catch (error) {
+                outputEl.innerText = "Error: " + error.message;
+            } finally {
+                submitBtn.disabled = false;
+                submitBtn.innerText = "Generate Care Plan";
+            }
+        }
+    </script>
+</body>
+</html>

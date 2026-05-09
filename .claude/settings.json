@@ -1,0 +1,10 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(docker-compose config *)",
+      "Bash(python manage.py check)",
+      "Bash(chmod +x /Users/ruiping/Documents/code/Clinical-Care-Plan/start.sh)",
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\" http://localhost:8000/)"
+    ]
+  }
+}

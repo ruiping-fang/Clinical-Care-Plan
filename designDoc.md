@@ -535,6 +535,6 @@ timestamp
 
 ---
 
-# 12. Key Design Insight（
+# 12. Key Design Insight
 
 > **“a safety-critical workflow system with strict data validation and duplicate detection”**
