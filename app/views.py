@@ -3,11 +3,13 @@ from django.shortcuts import render
 from django.views.decorators.csrf import csrf_exempt
 import json
 import os
+from dotenv import load_dotenv
 
 from openai import OpenAI
 
-client = OpenAI(api_key=os.environ.get("OPENAI_API_KEY"))
+load_dotenv()
 
+client = OpenAI(api_key=os.environ.get("OPENAI_API_KEY"))
 
 DATA_STORE = {}
 
@@ -17,9 +19,8 @@ def index(request):
 
 @csrf_exempt
 def generate_careplan(request):
-    if request.method == "POST":
+    if request.method == "POST":      
         body = json.loads(request.body)
-
         patient_name = body.get("name")
         diagnosis = body.get("diagnosis")
         medication = body.get("medication")
@@ -40,7 +41,6 @@ Output must include:
 - Pharmacist interventions
 - Monitoring plan
 """
-
         response = client.chat.completions.create(
             model="gpt-4o-mini",
             messages=[
@@ -52,7 +52,6 @@ Output must include:
 
         careplan = response.choices[0].message.content
 
-
         DATA_STORE[patient_name] = {
             "diagnosis": diagnosis,
             "medication": medication,
@@ -60,5 +59,4 @@ Output must include:
         }
 
         return JsonResponse({"careplan": careplan})
-
     return JsonResponse({"error": "Invalid request"})

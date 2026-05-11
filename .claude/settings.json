@@ -4,7 +4,12 @@
       "Bash(docker-compose config *)",
       "Bash(python manage.py check)",
       "Bash(chmod +x /Users/ruiping/Documents/code/Clinical-Care-Plan/start.sh)",
-      "Bash(curl -s -o /dev/null -w \"%{http_code}\" http://localhost:8000/)"
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\" http://localhost:8000/)",
+      "Bash(mkdir -p /Users/ruiping/Documents/code/Clinical-Care-Plan/.vscode)",
+      "Bash(curl -X POST http://localhost:8000/generate/ -H \"Content-Type: application/json\" -d '{\"name\":\"测试患者\",\"diagnosis\":\"测试诊断\",\"medication\":\"测试用药\",\"history\":\"测试病史\"}')"
+    ],
+    "additionalDirectories": [
+      "/Users/ruiping/Documents/code/Clinical-Care-Plan"
     ]
   }
 }

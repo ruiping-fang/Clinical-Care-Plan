@@ -1,0 +1,130 @@
+{
+  "info": {
+    "name": "Clinical Care Plan API",
+    "_postman_id": "clinical-care-plan-001",
+    "description": "临床护理计划生成接口测试集合",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Generate Care Plan - 糖尿病患者",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"name\": \"张三\",\n  \"diagnosis\": \"2型糖尿病\",\n  \"medication\": \"二甲双胍 500mg bid\",\n  \"history\": \"高血压病史5年\"\n}"
+        },
+        "url": {
+          "raw": "http://localhost:8000/generate/",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "8000",
+          "path": ["generate", ""]
+        },
+        "description": "为糖尿病患者生成护理计划"
+      },
+      "response": []
+    },
+    {
+      "name": "Generate Care Plan - 高血压患者",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"name\": \"李四\",\n  \"diagnosis\": \"原发性高血压\",\n  \"medication\": \"氨氯地平 5mg qd\",\n  \"history\": \"吸烟史20年，家族史阳性\"\n}"
+        },
+        "url": {
+          "raw": "http://localhost:8000/generate/",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "8000",
+          "path": ["generate", ""]
+        },
+        "description": "为高血压患者生成护理计划"
+      },
+      "response": []
+    },
+    {
+      "name": "Generate Care Plan - 心衰患者",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"name\": \"王五\",\n  \"diagnosis\": \"慢性心力衰竭 NYHA III级\",\n  \"medication\": \"呋塞米 40mg qd, 美托洛尔 25mg bid\",\n  \"history\": \"冠心病病史10年，曾行支架植入术\"\n}"
+        },
+        "url": {
+          "raw": "http://localhost:8000/generate/",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "8000",
+          "path": ["generate", ""]
+        },
+        "description": "为心衰患者生成护理计划"
+      },
+      "response": []
+    },
+    {
+      "name": "Test - 缺少参数",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"name\": \"测试患者\"\n}"
+        },
+        "url": {
+          "raw": "http://localhost:8000/generate/",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "8000",
+          "path": ["generate", ""]
+        },
+        "description": "测试缺少必填参数的情况"
+      },
+      "response": []
+    },
+    {
+      "name": "Home Page - GET",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8000/",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "8000",
+          "path": [""]
+        },
+        "description": "访问首页，检查服务是否正常运行"
+      },
+      "response": []
+    }
+  ]
+}
